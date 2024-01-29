@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Cute+Font&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Cute Font", sans-serif;
+  font-size: 25px;
+}
+
+body {
+  background-color: #2f3136;
+}

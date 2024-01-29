@@ -1,0 +1,11 @@
+.navContainer {
+  height: 50px;
+  background-color: #202225;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navContainer img {
+  height: 75%;
+}

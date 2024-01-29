@@ -1,13 +1,14 @@
-import NavBar from "./components/NavagationBar/NavBar";
-import HomePage from "./components/HomePage/HomePage";
-
+import Header from "./components/Header/Header";
+import Info from "./components/Pokemon_Info/Info";
 import "./App.css";
+import TestingInfo from "./components/Pokemon_Info/TestingInfo";
 
 function App() {
   return (
     <>
-      <NavBar></NavBar>
-      <HomePage></HomePage>
+      <Header></Header>
+      <TestingInfo></TestingInfo>
+      <Info></Info>
     </>
   );
 }
