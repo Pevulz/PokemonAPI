@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.leftContent,
+.rightContent {
+  flex-basis: 50%;
+}
+
+.leftContent {
+  border-style: solid;
+}
+
+.rightContent {
+  border-style: solid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
+  grid-gap: 20px;
+  justify-items: center;
+}
