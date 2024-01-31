@@ -8,8 +8,11 @@ function Card({ pokemon, loading }) {
         <h1>Loading...</h1>
       ) : (
         pokemon.map((pokemon) => (
-          <div key={pokemon.name} className="card">
-            {pokemon.name}
+          <div className="card" key={pokemon.id}>
+            <h1>
+              {pokemon.id}) {pokemon.name}
+            </h1>
+            <img src={pokemon.sprites.front_default}></img>
           </div>
         ))
       )}
