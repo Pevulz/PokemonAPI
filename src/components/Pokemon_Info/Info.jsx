@@ -1,74 +1,59 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Info.css";
+import axios from "axios";
 import Card from "./Card";
 
-function Info() {
-  const [pokemon, setPokemon] = useState("");
-  const [pokemonData, setPokemonData] = useState({});
-  const [cardData, setCardData] = useState(null);
+function TestingInfo() {
+  const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
+  const [nextUrl, setNextUrl] = useState();
+  const [prevUrl, setPrevUrl] = useState();
 
-  useEffect(() => {
-    //fetch data once on mount
-    const link = `https://pokeapi.co/api/v2/pokemon/`;
-    fetch(link).then((response) =>
-      response.json().then((data) => setCardData(data))
-    );
-  }, []);
+  async function fetchData() {
+    //load everything
+    setLoading(true);
+    //fetch api
+    const result = await axios.get(url);
 
-  console.log(cardData);
-
-  function searchPokemon(e) {
-    e.preventDefault();
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-
-    //Handle API call
-    fetch(url).then((response) =>
-      response
-        .json()
-        .then((data) => setPokemonData(data))
-        .catch((error) => console.error(error))
-    );
-    console.log(pokemonData);
+    //setting urls
+    setNextUrl(result.next);
+    setPrevUrl(result.previous);
+    //done loading
+    getPokemonData(result.data.results);
+    setLoading(false);
   }
+
+  //access pokemon data from url
+  async function getPokemonData(result) {
+    //iterate thro results
+    result.map(async (item) => {
+      //fetch pokemon's url
+      const pokeData = await axios.get(item.url);
+      //add to old data
+      setPokemonData((oldState) => {
+        oldState = [...oldState, pokeData.data];
+        oldState.sort();
+        return oldState;
+      });
+    });
+  }
+
+  //get data everytime url changes
+  useEffect(() => {
+    fetchData();
+  }, [url]);
 
   return (
     <>
       <div className="container">
-        <div className="leftContent">
-          <form className="search" onSubmit={searchPokemon}>
-            <input
-              type="text"
-              name="pokemon"
-              placeholder="Pokemon"
-              onChange={(e) => setPokemon(e.target.value)}
-            ></input>
-            <button type="submit">Search</button>
-          </form>
-
-          <div className="dataDisplay">
-            {JSON.stringify(pokemonData) != "{}" ? (
-              <>
-                <p>{pokemonData.name}</p>
-                <img src={`${pokemonData.sprites.front_default}`}></img>
-              </>
-            ) : (
-              <p>Nothing Here</p>
-            )}
-          </div>
-        </div>
+        <div className="leftContent"></div>
         <div className="rightContent">
-          {/*render data first then map*/}
-          {cardData &&
-            cardData.results.map((cardData) => (
-              <div key={cardData.name}>
-                <Card data={cardData} loading={loading}></Card>
-              </div>
-            ))}
+          <Card pokemon={pokemonData} loading={loading}></Card>
         </div>
       </div>
     </>
   );
 }
 
-export default Info;
+export default TestingInfo;
