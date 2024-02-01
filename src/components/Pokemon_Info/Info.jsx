@@ -64,11 +64,7 @@ function Info() {
     <>
       <div className="container">
         {pokemonData.map((pokemonData) => (
-          <Card
-            key={pokemonData.id}
-            pokemon={pokemonData}
-            loading={loading}
-          ></Card>
+          <Card pokemon={pokemonData} loading={loading}></Card>
         ))}
       </div>
       <div className="buttonContainer">

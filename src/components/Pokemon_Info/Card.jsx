@@ -4,6 +4,7 @@ import "./Card.css";
 
 function Card({ pokemon, loading }) {
   const [showDetails, setShowDetail] = useState(false);
+  console.log(pokemon);
 
   return (
     <>
@@ -12,6 +13,7 @@ function Card({ pokemon, loading }) {
       ) : (
         <>
           <div
+            key={pokemon.id}
             className="card"
             onMouseEnter={() => {
               setShowDetail(true);
@@ -22,18 +24,20 @@ function Card({ pokemon, loading }) {
           >
             {showDetails ? (
               <div className="card-back">
-                <h1>{pokemon.name}</h1>
+                <h1 className="pokemon-name">{pokemon.name}</h1>
                 {/*show pokemon type*/}
-                <p>
+                <div className="pokemon-type">
                   {pokemon.types.map((data) => (
                     <p>{data.type.name}</p>
                   ))}
-                </p>
-                <p>
+                </div>
+                <div className="pokemon-stats">
                   {pokemon.stats.map((data) => (
-                    <p>{data.stat.name}: </p>
+                    <p>
+                      {data.stat.name}: {data.base_stat}
+                    </p>
                   ))}
-                </p>
+                </div>
               </div>
             ) : (
               <div className="card-front">
