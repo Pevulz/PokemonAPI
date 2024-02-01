@@ -2,22 +2,16 @@
   display: flex;
   width: 90%;
   margin: auto;
-  padding-top: 100px;
-}
-
-.leftContent,
-.rightContent {
-  flex-basis: 50%;
-}
-
-.leftContent {
-  border-style: solid;
-}
-
-.rightContent {
-  border-style: solid;
+  padding-top: 75px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
+  grid-template-columns: repeat(4, minmax(200px, 0.5fr));
   grid-gap: 20px;
   justify-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin: 50px;
 }

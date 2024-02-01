@@ -3,12 +3,12 @@ import "./Info.css";
 import axios from "axios";
 import Card from "./Card";
 
-function TestingInfo() {
+function Info() {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-  const [nextUrl, setNextUrl] = useState();
-  const [prevUrl, setPrevUrl] = useState();
+  const [nextUrl, setNextUrl] = useState("");
+  const [prevUrl, setPrevUrl] = useState("");
 
   async function fetchData() {
     //load everything
@@ -17,8 +17,8 @@ function TestingInfo() {
     const result = await axios.get(url);
 
     //setting urls
-    setNextUrl(result.next);
-    setPrevUrl(result.previous);
+    setNextUrl(result.data.next);
+    setPrevUrl(result.data.previous);
     //done loading
     getPokemonData(result.data.results);
     setLoading(false);
@@ -44,16 +44,39 @@ function TestingInfo() {
     fetchData();
   }, [url]);
 
+  function previousPage() {
+    if (prevUrl != null) {
+      //reset list
+      setPokemonData([]);
+      setUrl(prevUrl);
+    }
+  }
+
+  function nextPage() {
+    if (nextUrl != null) {
+      //reset list
+      setPokemonData([]);
+      setUrl(nextUrl);
+    }
+  }
+
   return (
     <>
       <div className="container">
-        <div className="leftContent"></div>
-        <div className="rightContent">
-          <Card pokemon={pokemonData} loading={loading}></Card>
-        </div>
+        {pokemonData.map((pokemonData) => (
+          <Card
+            key={pokemonData.id}
+            pokemon={pokemonData}
+            loading={loading}
+          ></Card>
+        ))}
+      </div>
+      <div className="buttonContainer">
+        <button onClick={previousPage}>Previous</button>
+        <button onClick={nextPage}>Next</button>
       </div>
     </>
   );
 }
 
-export default TestingInfo;
+export default Info;
