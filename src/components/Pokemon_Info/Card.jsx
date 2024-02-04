@@ -4,12 +4,15 @@ import "./Card.css";
 
 function Card({ pokemon, loading }) {
   const [showDetails, setShowDetail] = useState(false);
-  console.log(pokemon);
 
   return (
     <>
       {loading ? (
-        <h1>Loading...</h1>
+        <>
+          <div className="card">
+            <h1>Loading...</h1>
+          </div>
+        </>
       ) : (
         <>
           <div

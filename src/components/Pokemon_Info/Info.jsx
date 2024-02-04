@@ -15,7 +15,6 @@ function Info() {
     setLoading(true);
     //fetch api
     const result = await axios.get(url);
-
     //setting urls
     setNextUrl(result.data.next);
     setPrevUrl(result.data.previous);
@@ -33,7 +32,8 @@ function Info() {
       //add to old data
       setPokemonData((oldState) => {
         oldState = [...oldState, pokeData.data];
-        oldState.sort();
+        //sort by id
+        oldState.sort((a, b) => a.id - b.id);
         return oldState;
       });
     });
