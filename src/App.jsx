@@ -2,15 +2,12 @@ import Header from "./components/Header/Header";
 import Info from "./components/Pokemon_Info/Info";
 import "./App.css";
 import SearchPage from "./components/SearchPokemon/SearchPage";
+import { useState } from "react";
 
 function App() {
-  const API_URL = "https://pokeapi.co/api/v2/pokemon/";
-
   return (
     <>
       <Header></Header>
-
-      <SearchPage API_URL={API_URL}></SearchPage>
     </>
   );
 }

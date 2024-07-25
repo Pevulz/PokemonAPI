@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import "./searchPage.css";
 
 function SearchPage({ API_URL }) {
   const searchRef = useRef(null);
@@ -51,16 +52,20 @@ function SearchPage({ API_URL }) {
 
   return (
     <>
-      <form onSubmit={searchPokemon}>
-        <input
-          ref={searchRef}
-          type="text"
-          name="pokemon"
-          placeholder="Search"
-        ></input>
-        <button type="submit">Search</button>
-      </form>
-      <div>{loading ? <p>Loading...</p> : showResult()}</div>
+      <div className="searchPage">
+        <form onSubmit={searchPokemon}>
+          <input
+            ref={searchRef}
+            type="text"
+            name="pokemon"
+            placeholder="Search"
+          ></input>
+          <button type="submit">Search</button>
+        </form>
+        <div className="display">
+          {loading ? <p>Loading...</p> : showResult()}
+        </div>
+      </div>
     </>
   );
 }
