@@ -31,19 +31,21 @@ function SearchPage({ API_URL }) {
     } else {
       return (
         <>
-          <div>
-            <h1>{result.data.name}</h1>
-            <img
-              src={result.data.sprites.other.dream_world.front_default}
-            ></img>
-            {result.data.types.map((data) => (
-              <p>{data.type.name}</p>
-            ))}
-            {result.data.stats.map((data) => (
-              <p>
-                {data.stat.name}: {data.base_stat}
-              </p>
-            ))}
+          <div className="pokemonDisplay">
+            <div className="pokemonImage">
+              <h1 className="pokemonName">{result.data.name}</h1>
+              <img height={200} src={result.data.sprites.front_default}></img>
+            </div>
+            <div className="pokemonData">
+              {result.data.types.map((data) => (
+                <p>{data.type.name}</p>
+              ))}
+              {result.data.stats.map((data) => (
+                <p>
+                  {data.stat.name}: {data.base_stat}
+                </p>
+              ))}
+            </div>
           </div>
         </>
       );

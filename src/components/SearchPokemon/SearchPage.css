@@ -4,3 +4,26 @@
   align-items: center;
   height: 100vh;
 }
+
+.pokemonData {
+  display: grid;
+  justify-content: center;
+  row-gap: 0px;
+}
+
+.pokemonDisplay {
+  display: flex;
+}
+
+.pokemonName {
+  position: relative;
+  top: 50px;
+}
+
+.pokemonImage {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  margin-left: 250px;
+  margin-right: 100px;
+}
